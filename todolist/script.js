@@ -1,8 +1,4 @@
-
-
-
-let todoItems = [
-];
+let todoItems = [];
 
 let finishedItems = [];
 
@@ -11,7 +7,7 @@ function renderTodoItemList(todoItems, finishedItems) {
     let paneEl = document.querySelector("#todolist > .list-pane");
     paneEl.innerHTML = "";
 
-    for (let i=0; i < todoItems.length; i++ ) {
+    for (let i = 0; i < todoItems.length; i++) {
         let item = todoItems[i];
         let itemDiv = document.createElement("div");
         itemDiv.className = "todo-item";
@@ -23,7 +19,7 @@ function renderTodoItemList(todoItems, finishedItems) {
             finishedItems.push(item);
             todoItems.splice(i, 1);
 
-            console.log("finshed:", i, todoItems, finishedItems );
+            console.log("finshed:", i, todoItems, finishedItems);
             renderTodoItemList(todoItems, finishedItems);
 
         });
@@ -59,7 +55,7 @@ function renderTodoItemList(todoItems, finishedItems) {
         itemDiv.append(titleEl);
         itemDiv.append(importanceEl);
         itemDiv.append(deleteBtn);
-        
+
         paneEl.append(itemDiv);
     }
 
@@ -70,7 +66,7 @@ function renderFinishedItemList(todoItems, finishedItems) {
     let paneEl = document.querySelector("#todolist > .list-pane");
     paneEl.innerHTML = "";
 
-    for (let i=0; i < finishedItems.length; i++ ) {
+    for (let i = 0; i < finishedItems.length; i++) {
         let item = finishedItems[i];
         let itemDiv = document.createElement("div");
         itemDiv.className = "todo-item";
@@ -85,13 +81,13 @@ function renderFinishedItemList(todoItems, finishedItems) {
         if (item.isImportance) {
             importanceEl.classList.add("open");
         }
-        
+
 
         titleEl.innerText = item.title;
 
         itemDiv.append(titleEl);
         itemDiv.append(importanceEl);
-        
+
         paneEl.append(itemDiv);
     }
 
@@ -104,20 +100,20 @@ function renderInputPane(todoItems) {
     let addBtnEl = inputPaneEl.querySelector("#add-btn");
     let hisBtnEl = inputPaneEl.querySelector("#his-btn");
 
-    addBtnEl.addEventListener("click", (e)=>{
+    addBtnEl.addEventListener("click", (e) => {
         let inputEl = inputPaneEl.querySelector("input");
 
         todoItems.push({
             title: inputEl.value,
             isFinished: false,
-            isImportance: false, 
+            isImportance: false,
         })
-        
+
         console.log("add a item: ", inputEl.value);
         renderTodoItemList(todoItems, finishedItems);
     });
 
-    hisBtnEl.addEventListener("click", (e)=>{
+    hisBtnEl.addEventListener("click", (e) => {
         if (hisBtnEl.classList.contains("open")) {
             hisBtnEl.classList.remove("open");
             renderTodoItemList(todoItems, finishedItems)
